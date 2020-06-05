@@ -1,0 +1,10 @@
+<apex:component >
+  <apex:form >
+      <apex:selectRadio layout="pageDirection">
+          <apex:selectOption itemLabel="One" itemValue="1"></apex:selectOption>
+          <apex:selectOption itemLabel="Two" itemValue="2"></apex:selectOption>
+          <apex:selectOption itemLabel="Three" itemValue="3"></apex:selectOption>
+          <apex:selectOption itemLabel="Four" itemValue="4"></apex:selectOption>
+      </apex:selectRadio>
+  </apex:form>
+</apex:component>

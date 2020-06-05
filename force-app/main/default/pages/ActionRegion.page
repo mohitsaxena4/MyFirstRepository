@@ -1,0 +1,14 @@
+<apex:page standardController="contact" extensions="ActionRegion" >
+    <apex:form >
+        <apex:pageBlock title="Add contact">
+            <apex:inputField value="{!contact.lastname}"/>
+            <apex:commandButton value="Save Contact" Action="{!Save}"/>
+        </apex:pageBlock>
+        <apex:actionRegion >
+            <apex:pageBlock title="View Message">
+                <apex:commandButton value="Welcome Message" action="{!data}" rerender="a"/>
+                <apex:outputText value="{!message}" id="a"/>
+            </apex:pageBlock>
+        </apex:actionRegion>
+    </apex:form>
+</apex:page>

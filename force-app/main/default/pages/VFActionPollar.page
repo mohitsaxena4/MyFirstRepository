@@ -1,0 +1,10 @@
+<apex:page controller="ActionPollar" >
+    <apex:form >
+    <apex:pageblock >
+        <apex:pageBlockSection >
+            <apex:actionPoller action="{!DTVal}" interval="5" reRender="OT1"/>
+            <apex:outputText id="OT1" value="{!DT}"></apex:outputText>
+        </apex:pageBlockSection>
+    </apex:pageblock>
+    </apex:form>
+</apex:page>

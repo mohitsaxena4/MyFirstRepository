@@ -1,0 +1,18 @@
+<apex:page Controller="Extensionc2c" extensions="extc2c" >
+    <apex:form >
+    <apex:pageBlock >
+         <!--<apex:pageBlockSection title="Add Acount">
+            <apex:inputfield value="{!Account.Name}"/>
+            <apex:inputfield value="{!Account.type}"/>
+            <apex:inputfield value="{!Account.industry}"/>
+        </apex:pageBlockSection>
+        <apex:commandButton action="{!Save}" value="Save"/>-->
+        <br/>
+        {!message}
+        Enter Num1: <apex:inputText value="{!Num1}"/>
+        Enter Num2: <apex:inputText value="{!Num2}"/>
+        <apex:outputText value="{!Res}"></apex:outputText>
+        <apex:commandButton action="{!Result}" value="Get Result"/>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

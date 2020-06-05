@@ -1,0 +1,106 @@
+<aura:component controller="QuizController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >   
+    
+    <!-- Aura Attributes-->
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="textSelected" type="string"/>
+    <aura:attribute name="subjectScreen" type="boolean" default="true"/>
+    <aura:attribute name="questionScreen" type="boolean" default="false"/>
+    <aura:attribute name="nextScreen" type="boolean" default="false"/>
+    <aura:attribute name="submitScreen" type="boolean" default="false"/>
+    <aura:attribute name="scoreScreen" type="boolean" default="false"/>
+    <aura:attribute name="quesList" type="List"/>
+    <aura:attribute name="question" type="string"/>
+    <aura:attribute name="op1" type="string"/>
+    <aura:attribute name="op2" type="string"/>
+    <aura:attribute name="op3" type="string"/>
+    <aura:attribute name="op4" type="string"/>
+    <aura:attribute name="answer" type="string"/>
+    <aura:attribute name="counter" type="integer" default="1"/>
+    <aura:attribute name="score" type="integer" default="0"/>
+    
+    <!-- Lightning Card -->
+    <article class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-align_absolute-center" style="height:5rem">
+                <div class="slds-text-heading_large">Salesforce Quiz</div>
+            </div>
+            <div class="slds-align_absolute-left" style="height:5rem">
+                1. All questions are compulsory.<br/>
+                2. Each question carry 4 marks for right answer and 1 mark will be deducted for wrong answer or not attempted.
+            </div>
+            <div class="slds-align_absolute-center" style="height:5rem">
+                <lightning:button variant="brand" label="Start Exam" title="Brand action" onclick="{!c.openModel}" />
+            </div>   
+        </div>    
+    </article>  
+    
+    <aura:if isTrue="{!v.isModalOpen}">
+        
+        <!-- Modal/Popup Box starts here-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box Header Starts here-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="{! v.subjectScreen ? 'slds-show slds-text-heading_large slds-hyphenate' : 'slds-hide'}">Choose any one subject to proceed.</h2>
+                    <h2 id="modal-heading-02" class="{! v.questionScreen ? 'slds-show slds-text-heading_large slds-hyphenate' : 'slds-hide'}">Q{!v.counter}) {!v.question}</h2>
+                    
+                </header>
+                <!--Modal/Popup Box Body Starts here-->
+                <div class="slds-modal__content slds-p-around_large" id="modal-content-id-1">
+                <div class="slds-p-vertical_x-medium">
+                    <div class="slds-align_absolute-center">
+                        <div class="{! v.subjectScreen ? 'slds-show' : 'slds-hide'}">
+                            <ui:inputRadio text="Salesforce Admin" label="Salesforce Admin" name="Subject" change="{!c.onGroup}"/>
+                            <ui:inputRadio text="Salesforce Developer" label="Salesforce Developer" name="Subject" change="{!c.onGroup}"/>
+                        </div>
+                        <div class="{! v.questionScreen ? 'slds-show' : 'slds-hide'}">
+                            <input class="myRadio" type="radio" id="opA" name="choice" value="{!v.op1}"/>
+                            <label for="{!v.op1}"> {!v.op1}</label><br/>
+                            <input class="myRadio" type="radio" id="opB" name="choice" value="{!v.op2}"/>
+                            <label for="{!v.op2}"> {!v.op2}</label><br/>
+                            <input class="myRadio" type="radio" id="opC" name="choice" value="{!v.op3}"/>
+                            <label for="{!v.op3}"> {!v.op3}</label><br/>
+                            <input class="myRadio" type="radio" id="opD" name="choice" value="{!v.op4}"/>
+                            <label for="{!v.op4}"> {!v.op4}</label><br/>
+                        </div>
+                        <div class="{! v.scoreScreen ? 'slds-show' : 'slds-hide'}">
+                            Your Score : {!v.score}/40
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!--Modal/Popup Box Footer Starts here-->
+                <footer class="slds-modal__footer">
+                    <div class="slds-align_absolute-center">
+                    <lightning:button variant="neutral"
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"
+                                      class= "{! v.subjectScreen ? 'slds-show' : 'slds-hide'}"/>
+                    <lightning:button variant="brand"
+                                      label="Start Quiz"
+                                      title="Start Quiz"
+                                      onclick="{!c.submitDetails}"
+                                      class= "{! v.subjectScreen ? 'slds-show' : 'slds-hide'}"/>
+                    <lightning:button variant="brand"
+                                      label="Next"
+                                      title="Next"
+                                      onclick="{!c.nextDetail}"
+                                      class= "{! v.nextScreen ? 'slds-show' : 'slds-hide'}"/>
+                    <lightning:button variant="brand"
+                                      label="Submit Quiz"
+                                      title="Submit Quiz"
+                                      onclick="{!c.totalScore}"
+                                      class= "{! v.submitScreen ? 'slds-show' : 'slds-hide'}"/>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

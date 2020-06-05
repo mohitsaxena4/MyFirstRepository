@@ -1,0 +1,9 @@
+<apex:page >
+    <h1 style="font-size:15px;">Select Subject for Quiz to proceed.</h1>
+    <apex:form >
+      <apex:selectRadio layout="pageDirection">
+          <apex:selectOption itemLabel="Salesforce Admin" itemValue="1"></apex:selectOption>
+          <apex:selectOption itemLabel="Salesforce Developer" itemValue="2"></apex:selectOption>
+      </apex:selectRadio>
+  </apex:form>
+</apex:page>

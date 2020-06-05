@@ -1,0 +1,33 @@
+<apex:page controller="actionFunctionClass">
+    <script type="text/javascript">
+    function invokeMe()
+    {
+        var email;
+        email = document.getElementById("{! $Component.form1.pb1.ip2}").value;
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z_\-\.])+\.([A-Za-z]{2,4})$/;
+        if(document.getElementById('{!$Component.form1.pb1.ip1}').value=='')
+            {
+                alert("Name cannot be empty");
+            }
+       else if(document.getElementById('{! $Component.form1.pb1.ip2}').value=='')
+                alert("Email Mandatory");
+        
+         else  if (reg.test(email)==false )
+              {
+                alert('Email format is not correct');     
+              }
+        else
+                {
+        callMethod();
+                }
+    }
+    </script>
+    <apex:form id="form1">
+       <apex:pageBlock id="pb1">   
+           Enter name: <apex:inputtext value="{!name}" id="ip1"/><br/>
+           Enter Email:<apex:inputtext value="{!Email}" id="ip2"/>
+        <apex:commandButton onclick="invokeMe(); return false;" value="Call Invoke"/>
+            <apex:actionFunction name="callMethod" action="{!Callme}" />
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
